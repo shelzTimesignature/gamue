@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  surname   String?
+  isActive  Boolean  @default(false)
+  email     String?  @unique
+  password  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Company {
+  id        String    @id @default(cuid())
+  name      String?
+  phone     String?
+  address   String?
+  type      String? // application to farm and application to
+  isActive  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  License   License[]
+}
+
+model License {
+  id         String    @id @default(cuid())
+  approved   Boolean   @default(false)
+  company_id String?
+  company    Company   @relation(fields: [companyId], references: [id])
+  expiryDate DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  companyId  String
+}
+
+model harvest {
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  hactares        Decimal
+  expectedHarvest Decimal
+  actualHarvest   Decimal
+}
+
+model Distribution {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
