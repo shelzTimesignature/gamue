@@ -56,10 +56,14 @@ export default function AppLayout(){
                                     <Link to={'/company'}>
                                         <span className="block text-xs">Company</span>
                                     </Link>
-                                    <Link to={'/licenses'}>
+
+                                    <Link to={'/drug'}>
+                                        <span className="block text-xs">Drug</span>
+                                    </Link>
+                                    <Link to={'/license'}>
                                         <span className="block text-xs">Licenses</span>
                                     </Link>
-                                    <Link to={'/Distributions'}>
+                                    <Link to={'/Distribution'}>
                                         <span className="block text-xs">Distributions</span>
                                     </Link>
                                 </div>

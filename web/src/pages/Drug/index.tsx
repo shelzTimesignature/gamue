@@ -1,21 +1,21 @@
 import {Link, useNavigate} from "react-router-dom";
 import useDataQuery from "@/hooks/useDataQuery.ts";
 
-export default function License(){
+export default function Drug(){
 
 
-    const {data,isLoading,isError}=useDataQuery('license','/license')
+    const {data,isLoading,isError}=useDataQuery('drug','/drug')
 
     const navigate=useNavigate()
 
 
     return (
         <div className={'p-10'}>
-            <span className="block tracking-widest uppercase text-xs">License</span>
+            <span className="block tracking-widest uppercase text-xs">Drug</span>
 
             <div className="mt-10 flex items-center space-x-5">
-                <span className="block text-3xl font-bold">License</span>
-                <Link to={'/license/create'}>
+                <span className="block text-3xl font-bold">Drug</span>
+                <Link to={'/drug/create'}>
                     <span className={'text-xs bg-zinc-800 px-3 py-1'}>
                         Create new
                     </span>
@@ -56,17 +56,15 @@ export default function License(){
                         <table className={'w-full'}>
                             <thead>
                                 <tr>
-                                    <th className={'px-3 py-2 text-xs text-left font-medium text-zinc-600'}>Company</th>
-                                    <th className={'px-3 py-2 w-48 text-xs text-left font-medium text-zinc-600'}>Status</th>
+                                    <th className={'px-3 py-2 text-xs text-left font-medium text-zinc-600'}>Name</th>
                                     <th className={'px-3 py-2 w-48 text-xs text-left font-medium text-zinc-600'}>Created At</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {
-                                data.map((x:any,i:number)=>(
+                                data!.map((x:any,i:number)=>(
                                     <tr key={i} className={`${i%2===0 ? 'bg-zinc-800' : ''} hover:bg-zinc-950`}>
-                                        <td onClick={()=>navigate(`/license/edit/${x.id}`)} className={'text-xs cursor-pointer px-3 py-4 text-zinc-400'}>{x.status}</td>
-                                        <td className={'text-xs cursor-pointer px-3 py-4 text-zinc-400'}>{x.status}</td>
+                                        <td onClick={()=>navigate(`/drug/edit/${x.id}`)} className={'text-xs cursor-pointer px-3 py-4 text-zinc-400'}>{x.name}</td>
                                         <td className={'text-xs px-3 py-4 text-zinc-400'}>{x.createdAt}</td>
                                     </tr>
                                 ))

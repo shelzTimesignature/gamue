@@ -6,21 +6,16 @@ import {useToast} from "@/components/ui/use-toast.ts";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import useDataQuery from "@/hooks/useDataQuery.ts";
 
-export default function EditCompany(){
+export default function EditDrug(){
 
 
 
     const [state,setState]=useState({
         name:'',
-        address:'',
-        phone:'',
-        email:'',
-        type:'',
-        isActive:false
     })
 
     const {id}=useParams()
-    const {data,isLoading,isError}=useDataQuery(`company-${id}`,`/company/${id}`)
+    const {data,isLoading,isError}=useDataQuery(`drug-${id}`,`/drug/${id}`)
 
 
     useEffect(()=>{
@@ -28,11 +23,6 @@ export default function EditCompany(){
             setState(prev=>({
                 ...prev,
                 name: data.name,
-                address: data.address,
-                phone:data.phone,
-                email: data.email,
-                type:data.type,
-                isActive: data.isActive
             }))
 
         }
@@ -61,7 +51,7 @@ export default function EditCompany(){
 
 
     const mutation=useMutation(async (value)=>{
-        const {data}=await http.patch(`/company/${id}`,value)
+        const {data}=await http.patch(`/drug/${id}`,value)
         return data
     },{
         onSuccess:async()=>{
@@ -71,7 +61,7 @@ export default function EditCompany(){
                 description: `Record has been modified successfully`,
                 className:'bg-green-600 text-white border-none'
             })
-            navigate('/company')
+            navigate('/drug')
 
 
         },
@@ -142,75 +132,6 @@ export default function EditCompany(){
                                             className="input"
                                             name={'name'}
                                             value={state.name}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-
-                                    <div className={'col-span-2'}>
-                            <span className="block text-xs mb-3">
-                               Address
-                            </span>
-                                        <textarea
-                                            rows={4}
-                                            className="input"
-                                            name={'address'}
-                                            value={state.address}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-
-                                    <div>
-                            <span className="block text-xs mb-3">
-                               Phone
-                            </span>
-                                        <input
-                                            type="text"
-                                            className="input"
-                                            name={'phone'}
-                                            value={state.phone}
-                                            onChange={handleChange}
-                                        />
-                                    </div>
-
-                                    <div>
-                            <span className="block text-xs mb-3">
-                               Type
-                            </span>
-                                        <select
-                                            className="input"
-                                            name={'type'}
-                                            value={state.type}
-                                            onChange={handleChange}
-                                        >
-                                            <option value="">Select Company Type</option>
-                                            <option value="producer">Producer</option>
-                                            <option value="user">User</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <span className="block text-xs mb-3">
-                                           Is Active
-                                        </span>
-                                        <input
-                                            type={'checkbox'}
-                                            className={'accent-green-500'}
-                                            checked={state.isActive}
-                                            //value={state.isActive}
-                                            onChange={()=>setState(prev=>({...prev,isActive: !state.isActive}))}
-                                        />
-                                    </div>
-                                    <div></div>
-
-                                    <div>
-                                        <span className="block text-xs mb-3">
-                                           Email
-                                        </span>
-                                        <input
-                                            type="text"
-                                            className="input"
-                                            name={'email'}
-                                            value={state.email}
                                             onChange={handleChange}
                                         />
                                     </div>

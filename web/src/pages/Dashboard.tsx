@@ -37,8 +37,15 @@ export default function Dashboard(){
                     </div>
                 </Link>
 
-                <Link to={'/licenses'} className="bg-zinc-800 p-5">
+                <Link to={'/license'} className="bg-zinc-800 p-5">
                     <span className="block text-xs">License</span>
+                    <div className="mt-5">
+                        <PlusCircle />
+                    </div>
+                </Link>
+
+                <Link to={'/drug'} className="bg-zinc-800 p-5">
+                    <span className="block text-xs">Drug</span>
                     <div className="mt-5">
                         <PlusCircle />
                     </div>

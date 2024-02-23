@@ -13,6 +13,13 @@ import AuthLayout from "@/layouts/AuthLayout.tsx";
 import {Toaster} from "@/components/ui/toaster.tsx";
 import Company from "@/pages/Company";
 import CreateCompany from "@/pages/Company/create.tsx";
+import EditCompany from "@/pages/Company/edit.tsx";
+import Drug from "@/pages/Drug";
+import CreateDrug from "@/pages/Drug/create.tsx";
+import EditDrug from "@/pages/Drug/edit.tsx";
+import License from "@/pages/License";
+import CreateLicense from "@/pages/License/create.tsx";
+import EditLicense from "@/pages/License/edit.tsx";
 
 
 const router = createBrowserRouter([
@@ -46,9 +53,53 @@ const router = createBrowserRouter([
             {
                 path:'company/edit/:id',
                 element: (
-                    <Company/>
+                    <EditCompany/>
                 )
             },
+
+            {
+                path:'drug',
+                element: (
+                    <Drug/>
+                )
+            },
+
+            {
+                path:'drug/create',
+                element: (
+                    <CreateDrug/>
+                )
+            },
+
+            {
+                path:'drug/edit/:id',
+                element: (
+                    <EditDrug/>
+                )
+            },
+
+            {
+                path:'license',
+                element: (
+                    <License/>
+                )
+            },
+
+            {
+                path:'license/create',
+                element: (
+                    <CreateLicense/>
+                )
+            },
+
+            {
+                path:'license/edit/:id',
+                element: (
+                    <EditLicense/>
+                )
+            },
+
+
         ]
     },
     {
