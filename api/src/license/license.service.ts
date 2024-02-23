@@ -17,7 +17,7 @@ export class LicenseService {
   findAll() {
     return this.prisma.license.findMany({
       include:{
-        company:true
+        Company:true,
       }
     })
   }

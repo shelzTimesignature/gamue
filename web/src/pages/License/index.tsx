@@ -65,7 +65,7 @@ export default function License(){
                             {
                                 data.map((x:any,i:number)=>(
                                     <tr key={i} className={`${i%2===0 ? 'bg-zinc-800' : ''} hover:bg-zinc-950`}>
-                                        <td onClick={()=>navigate(`/license/edit/${x.id}`)} className={'text-xs cursor-pointer px-3 py-4 text-zinc-400'}>{x.status}</td>
+                                        <td onClick={()=>navigate(`/license/edit/${x.id}`)} className={'text-xs cursor-pointer px-3 py-4 text-zinc-400'}>{x?.Company?.name}</td>
                                         <td className={'text-xs cursor-pointer px-3 py-4 text-zinc-400'}>{x.status}</td>
                                         <td className={'text-xs px-3 py-4 text-zinc-400'}>{x.createdAt}</td>
                                     </tr>
