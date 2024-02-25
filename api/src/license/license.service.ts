@@ -17,7 +17,8 @@ export class LicenseService {
   findAll() {
     return this.prisma.license.findMany({
       include:{
-        Company:true,
+        user:true,
+        drug:true
       }
     })
   }
@@ -43,7 +44,7 @@ export class LicenseService {
     return this.prisma.license.delete({
       where:{
         id
-      }
+      },
     })
   }
 }

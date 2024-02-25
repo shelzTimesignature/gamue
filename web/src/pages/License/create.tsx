@@ -10,23 +10,12 @@ export default function CreateLicense(){
 
 
     const { toast } = useToast()
-
-    const {data:company}=useDataQuery('company','/company')
     const {data:drug}=useDataQuery('drug','/drug')
 
 
     const [state,setState]=useState({
-        status:'applied',
-        companyId:'',
         drugId:'',
-        expiry_date:'',
-        proof_of_fund:false,
-        has_signed_zida_application:false,
-        has_security_plan:false,
-        has_proof_of_land:false,
-        is_the_company_registered:false,
-        has_work_permit:false,
-        has_capacity:false,
+
     })
 
     const handleChange=(e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>)=>{
@@ -86,26 +75,6 @@ export default function CreateLicense(){
 
 
                     <div className="mt-10 grid grid-cols-2 gap-8">
-
-                        <div>
-                            <span className="block text-xs mb-3">
-                               Company
-                            </span>
-                            <select
-                                className="input"
-                                name={'companyId'}
-                                value={state.companyId}
-                                onChange={handleChange}
-                            >
-                                <option value="">Select Company</option>
-                                {
-                                    company && company.map((x:any,i:number)=>(
-                                        <option value={x.id} key={i}>{x.name}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-
                         <div>
                             <span className="block text-xs mb-3">
                                Drug
@@ -124,85 +93,6 @@ export default function CreateLicense(){
                                 }
                             </select>
                         </div>
-
-                        <div>
-                            <span className="block text-xs mb-3">
-                               Expiry Date
-                            </span>
-                            <input
-                                type="date"
-                                className="input"
-                                name={'expiry_date'}
-                                value={state.expiry_date}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div></div>
-                        <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                               Has Capacity
-                            </span>
-                            <input
-                                type={'checkbox'}
-                                className={'accent-green-500'}
-                                checked={state.has_capacity}
-                                //value={state.isActive}
-                                onChange={()=>setState(prev=>({...prev,has_capacity: !state.has_capacity}))}
-                            />
-                        </div>
-
-                        <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                                   Has Proof of Land
-                                </span>
-                            <input
-                                type={'checkbox'}
-                                className={'accent-green-500'}
-                                checked={state.has_proof_of_land}
-                                //value={state.isActive}
-                                onChange={()=>setState(prev=>({...prev,has_proof_of_land: !state.has_proof_of_land}))}
-                            />
-                        </div>
-
-                        <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                                   Has Work Permit
-                                </span>
-                            <input
-                                type={'checkbox'}
-                                className={'accent-green-500'}
-                                checked={state.has_work_permit}
-                                //value={state.isActive}
-                                onChange={()=>setState(prev=>({...prev,has_work_permit: !state.has_work_permit}))}
-                            />
-                        </div>
-
-                        <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                                   Is The Company Registered
-                                </span>
-                            <input
-                                type={'checkbox'}
-                                className={'accent-green-500'}
-                                checked={state.is_the_company_registered}
-                                //value={state.isActive}
-                                onChange={()=>setState(prev=>({...prev,is_the_company_registered: !state.is_the_company_registered}))}
-                            />
-                        </div>
-
-                        <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                                   Has Signed Zida application
-                                </span>
-                            <input
-                                type={'checkbox'}
-                                className={'accent-green-500'}
-                                checked={state.has_signed_zida_application}
-                                //value={state.isActive}
-                                onChange={()=>setState(prev=>({...prev,has_signed_zida_application: !state.has_signed_zida_application}))}
-                            />
-                        </div>
-
                     </div>
                 </div>
             </div>

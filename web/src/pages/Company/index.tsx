@@ -4,7 +4,7 @@ import useDataQuery from "@/hooks/useDataQuery.ts";
 export default function Company(){
 
 
-    const {data,isLoading,isError}=useDataQuery('company','/company')
+    const {data,isLoading,isError}=useDataQuery('users','/users')
 
     const navigate=useNavigate()
 
@@ -62,7 +62,7 @@ export default function Company(){
                             </thead>
                             <tbody>
                             {
-                                data!.map((x:any,i:number)=>(
+                                data!.filter((x:any)=>x.type==='company').map((x:any,i:number)=>(
                                     <tr key={i} className={`${i%2===0 ? 'bg-zinc-800' : ''} hover:bg-zinc-950`}>
                                         <td onClick={()=>navigate(`/company/edit/${x.id}`)} className={'text-xs cursor-pointer px-3 py-4 text-zinc-400'}>{x.name}</td>
                                         <td className={'text-xs px-3 py-4 text-zinc-400'}>{x.createdAt}</td>

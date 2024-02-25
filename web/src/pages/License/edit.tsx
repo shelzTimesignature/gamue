@@ -8,23 +8,17 @@ import useDataQuery from "@/hooks/useDataQuery.ts";
 
 export default function EditLicense(){
 
+    const {data:user}=useDataQuery('user','user')
 
-
-    const {data:company}=useDataQuery('company','/company')
+    const {data:company}=useDataQuery('users','/users')
     const {data:drug}=useDataQuery('drug','/drug')
 
     const [state,setState]=useState({
-        status:'',
-        companyId:'',
+        userId:'',
         drugId:'',
         expiry_date:'',
-        proof_of_fund:false,
-        has_signed_zida_application:false,
-        has_security_plan:false,
-        has_proof_of_land:false,
-        is_the_company_registered:false,
-        has_work_permit:false,
-        has_capacity:false,
+        reason:'',
+        status:''
     })
 
     const {id}=useParams()
@@ -35,17 +29,11 @@ export default function EditLicense(){
         if(data){
             setState(prev=>({
                 ...prev,
-                status:data.status,
-                companyId:data.companyId,
+                userId:data.userId,
                 drugId:data.drugId,
-                expiry_date:data.expiry_date,
-                proof_of_fund:data.proof_of_fund,
-                has_signed_zida_application:data.has_signed_zida_application,
-                has_security_plan:data.has_security_plan,
-                has_proof_of_land:data.has_proof_of_land,
-                is_the_company_registered:data.is_the_company_registered,
-                has_work_permit:data.has_work_permitlse,
-                has_capacity:data.has_capacity,
+                expiry_date:data.expiry_date ?? '',
+                reason:data.reason ?? '',
+                status:data.status ?? ''
             }))
 
         }
@@ -144,33 +132,17 @@ export default function EditLicense(){
                             <div className="mt-10">
                                 <span className="block text-3xl uppercase tracking-widest font-bold">Modify</span>
 
-
                                 <div className="mt-10 grid grid-cols-2 gap-8">
-                                    <div>
-                                        <span className="block text-xs mb-3">
-                                           Status
-                                        </span>
-                                        <select
-                                            className="input"
-                                            name={'status'}
-                                            value={state.status}
-                                            onChange={handleChange}
-                                        >
-                                            <option value="">Select Status</option>
-                                            <option value="processing">Processing</option>
-                                            <option value="accepted">Accepted</option>
-                                            <option value="rejected">Rejected</option>
-                                        </select>
-                                    </div>
 
                                     <div>
-                            <span className="block text-xs mb-3">
-                               Company
-                            </span>
+                                    <span className="block text-xs mb-3">
+                                       Company
+                                    </span>
                                         <select
+                                            disabled
                                             className="input"
                                             name={'companyId'}
-                                            value={state.companyId}
+                                            value={state.userId}
                                             onChange={handleChange}
                                         >
                                             <option value="">Select Company</option>
@@ -183,10 +155,11 @@ export default function EditLicense(){
                                     </div>
 
                                     <div>
-                            <span className="block text-xs mb-3">
-                               Drug
-                            </span>
+                                        <span className="block text-xs mb-3">
+                                           Drug
+                                        </span>
                                         <select
+                                            disabled
                                             className="input"
                                             name={'drugId'}
                                             value={state.drugId}
@@ -201,83 +174,59 @@ export default function EditLicense(){
                                         </select>
                                     </div>
 
+
+
                                     <div>
-                            <span className="block text-xs mb-3">
-                               Expiry Date
-                            </span>
-                                        <input
-                                            type="date"
-                                            className="input"
-                                            name={'expiry_date'}
-                                            value={state.expiry_date}
+                                        <span className="block text-xs mb-3">Status</span>
+                                        <select
+                                            disabled={user.type==='company'}
+                                            name="status"
                                             onChange={handleChange}
-                                        />
+                                            className="input">
+                                            <option value="">Select Type</option>
+                                            <option value="accepted">Accepted</option>
+                                            <option value="rejected">Rejected</option>
+                                        </select>
                                     </div>
                                     <div></div>
-                                    <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                               Has Capacity
-                            </span>
-                                        <input
-                                            type={'checkbox'}
-                                            className={'accent-green-500'}
-                                            checked={state.has_capacity}
-                                            //value={state.isActive}
-                                            onChange={()=>setState(prev=>({...prev,has_capacity: !state.has_capacity}))}
-                                        />
-                                    </div>
 
-                                    <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                                   Has Proof of Land
-                                </span>
-                                        <input
-                                            type={'checkbox'}
-                                            className={'accent-green-500'}
-                                            checked={state.has_proof_of_land}
-                                            //value={state.isActive}
-                                            onChange={()=>setState(prev=>({...prev,has_proof_of_land: !state.has_proof_of_land}))}
-                                        />
-                                    </div>
+                                    {
+                                       state.status==='accepted' && (
+                                            <div className={'col-span-2'}>
+                                                <span className="block text-xs mb-3">
+                                                   Expiry Date
+                                                </span>
+                                                <input
+                                                    disabled={user.type==='company'}
+                                                    type="date"
+                                                    className="input"
+                                                    name={'expiry_date'}
+                                                    value={state.expiry_date}
+                                                    onChange={handleChange}
+                                                />
+                                            </div>
+                                        )
+                                    }
 
-                                    <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                                   Has Work Permit
-                                </span>
-                                        <input
-                                            type={'checkbox'}
-                                            className={'accent-green-500'}
-                                            checked={state.has_work_permit}
-                                            //value={state.isActive}
-                                            onChange={()=>setState(prev=>({...prev,has_work_permit: !state.has_work_permit}))}
-                                        />
-                                    </div>
-
-                                    <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                                   Is The Company Registered
-                                </span>
-                                        <input
-                                            type={'checkbox'}
-                                            className={'accent-green-500'}
-                                            checked={state.is_the_company_registered}
-                                            //value={state.isActive}
-                                            onChange={()=>setState(prev=>({...prev,is_the_company_registered: !state.is_the_company_registered}))}
-                                        />
-                                    </div>
-
-                                    <div className={'flex items-center justify-between'}>
-                                <span className="block text-xs">
-                                   Has Signed Zida application
-                                </span>
-                                        <input
-                                            type={'checkbox'}
-                                            className={'accent-green-500'}
-                                            checked={state.has_signed_zida_application}
-                                            //value={state.isActive}
-                                            onChange={()=>setState(prev=>({...prev,has_signed_zida_application: !state.has_signed_zida_application}))}
-                                        />
-                                    </div>
+                                    <>
+                                        {
+                                            state.status==='rejected' && (
+                                                <div className={'col-span-2'}>
+                                                    <span className="block text-xs mb-3">
+                                                       Reason
+                                                    </span>
+                                                    <textarea
+                                                        disabled={user.type==='company'}
+                                                        rows={5}
+                                                        className="input"
+                                                        name={'reason'}
+                                                        value={state.reason}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                            )
+                                        }
+                                    </>
                                 </div>
                             </div>
                         </div>
@@ -287,19 +236,23 @@ export default function EditLicense(){
                                 <span className="text-xs text-white font-medium">Duplicate</span>
                                 <span className="text-xs text-white font-medium">Delete</span>
                             </div>
-                            <div className="mt-10 grid grid-cols-2 gap-3">
-                                <div>
-                                    <button onClick={_submit} disabled={mutation.isLoading} className="w-full border py-4 border-zinc-700 text-xs text-zinc-400">
-                                        {
-                                            mutation.isLoading ? '...Updating' : 'Update'
-                                        }
-                                    </button>
-                                </div>
+                            {
+                                user.type==='system' && (
+                                    <div className="mt-10 grid grid-cols-2 gap-3">
+                                        <div>
+                                            <button onClick={_submit} disabled={mutation.isLoading} className="w-full border py-4 border-zinc-700 text-xs text-zinc-400">
+                                                {
+                                                    mutation.isLoading ? '...Updating' : 'Update'
+                                                }
+                                            </button>
+                                        </div>
 
-                                <div>
-                                    <button className="w-full bg-zinc-400 py-4 text-xs text-zinc-800">Publish</button>
-                                </div>
-                            </div>
+                                        <div>
+                                            <button className="w-full bg-zinc-400 py-4 text-xs text-zinc-800">Publish</button>
+                                        </div>
+                                    </div>
+                                )
+                            }
 
 
                             <div className="mt-10">

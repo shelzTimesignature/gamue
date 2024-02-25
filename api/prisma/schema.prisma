@@ -8,26 +8,14 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  surname   String?
-  isActive  Boolean  @default(false)
-  email     String?  @unique
-  password  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Company {
   id        String    @id @default(cuid())
-  name      String?
-  phone     String?
-  address   String?
-  email     String?
-  type      String? // application to farm and application to
-  isActive  Boolean   @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  name      String?
+  email     String?   @unique
+  password  String?
+  type      String?
+  phone     String?
   License   License[]
 }
 
@@ -35,40 +23,19 @@ model Drug {
   id        String    @id @default(cuid())
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  name      String?
+  name      String?   @unique
   License   License[]
 }
 
 model License {
-  id                          String   @id @default(cuid())
-  createdAt                   DateTime @default(now())
-  updatedAt                   DateTime @updatedAt
-  status                      String? // sent, processing, processed, accepted, rejected
-  companyId                   String
-  Company                     Company  @relation(fields: [companyId], references: [id])
-  expiry_date                 String
-  drugId                      String
-  drug                        Drug     @relation(fields: [drugId], references: [id])
-  proof_of_fund               Boolean  @default(false)
-  has_signed_zida_application Boolean  @default(false)
-  has_security_plan           Boolean  @default(false)
-  has_proof_of_land           Boolean  @default(false)
-  is_the_company_registered   Boolean  @default(false)
-  has_work_permit             Boolean  @default(false)
-  has_capacity                Boolean  @default(false)
-}
-
-model harvest {
-  id              String   @id @default(cuid())
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  hactares        Decimal
-  expectedHarvest Decimal
-  actualHarvest   Decimal
-}
-
-model Distribution {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  drugId      String
+  drug        Drug     @relation(fields: [drugId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  reason      String?
+  status      String?
+  expiry_date String?
 }

@@ -1,7 +1,11 @@
 import {CheckCircle, PlusCircle} from "lucide-react";
 import {Link} from "react-router-dom";
+import useDataQuery from "@/hooks/useDataQuery.ts";
 
 export default function Dashboard(){
+
+    const {data:user}=useDataQuery('user','user')
+
     return (
         <div className={'p-10'}>
 
@@ -20,54 +24,85 @@ export default function Dashboard(){
 
                 </div>
             </div>
+            <>
+                {
+                    user.type==='system' && (
+                        <div className="mt-10 grid grid-cols-4 gap-5">
 
-            <div className="mt-10 grid grid-cols-4 gap-5">
+                            <div className="bg-zinc-800 p-5">
+                                <span className="block text-xs">Categories</span>
+                                <div className="mt-5">
+                                    <PlusCircle />
+                                </div>
+                            </div>
 
-                <div className="bg-zinc-800 p-5">
-                    <span className="block text-xs">Categories</span>
-                    <div className="mt-5">
-                        <PlusCircle />
-                    </div>
-                </div>
+                            <Link to={'/company'} className="bg-zinc-800 p-5">
+                                <span className="block text-xs">Companies</span>
+                                <div className="mt-5">
+                                    <PlusCircle />
+                                </div>
+                            </Link>
 
-                <Link to={'/company'} className="bg-zinc-800 p-5">
-                    <span className="block text-xs">Companies</span>
-                    <div className="mt-5">
-                        <PlusCircle />
-                    </div>
-                </Link>
+                            <Link to={'/license'} className="bg-zinc-800 p-5">
+                                <span className="block text-xs">License</span>
+                                <div className="mt-5">
+                                    <PlusCircle />
+                                </div>
+                            </Link>
 
-                <Link to={'/license'} className="bg-zinc-800 p-5">
-                    <span className="block text-xs">License</span>
-                    <div className="mt-5">
-                        <PlusCircle />
-                    </div>
-                </Link>
-
-                <Link to={'/drug'} className="bg-zinc-800 p-5">
-                    <span className="block text-xs">Drug</span>
-                    <div className="mt-5">
-                        <PlusCircle />
-                    </div>
-                </Link>
-
-
-                <div className="bg-zinc-800 p-5">
-                    <span className="block text-xs">Distributions</span>
-                    <div className="mt-5">
-                        <PlusCircle />
-                    </div>
-                </div>
+                            <Link to={'/drug'} className="bg-zinc-800 p-5">
+                                <span className="block text-xs">Drug</span>
+                                <div className="mt-5">
+                                    <PlusCircle />
+                                </div>
+                            </Link>
 
 
-                <Link to={'/tracking'} className="bg-zinc-800 p-5">
-                    <span className="block text-xs">Tracking</span>
-                    <div className="mt-5">
-                        <PlusCircle />
-                    </div>
-                </Link>
+                            <div className="bg-zinc-800 p-5">
+                                <span className="block text-xs">Distributions</span>
+                                <div className="mt-5">
+                                    <PlusCircle />
+                                </div>
+                            </div>
 
-            </div>
+
+                            <Link to={'/tracking'} className="bg-zinc-800 p-5">
+                                <span className="block text-xs">Tracking</span>
+                                <div className="mt-5">
+                                    <PlusCircle />
+                                </div>
+                            </Link>
+
+                        </div>
+                    )
+                }
+            </>
+            <>
+                {
+                    user.type==='company' && (
+                        <div className="mt-10 grid grid-cols-4 gap-5">
+
+
+
+                            <Link to={'/license'} className="bg-zinc-800 p-5">
+                                <span className="block text-xs">License</span>
+                                <div className="mt-5">
+                                    <PlusCircle />
+                                </div>
+                            </Link>
+
+
+                            <div className="bg-zinc-800 p-5">
+                                <span className="block text-xs">Distributions</span>
+                                <div className="mt-5">
+                                    <PlusCircle />
+                                </div>
+                            </div>
+
+                        </div>
+                    )
+                }
+            </>
 
         </div>
     )

@@ -34,13 +34,13 @@ export default function Login(){
             localStorage.setItem(ACCESS_TOKEN_LABEL,data.accessToken)
             localStorage.setItem(REFRESH_TOKEN_LABEL,data.refreshToken)
 
-
+            navigate('/')
             toast({
                 title: "Success Message!!!",
                 description: `You are successfully authenticated`,
                 className:'bg-green-600 text-white border-none'
             })
-            navigate('/')
+
 
 
         },
@@ -65,7 +65,7 @@ export default function Login(){
             <div className="w-1/3">
                 <div className="w-full bg-zinc-900 p-10">
                     <span className="block text-4xl font-light">Login</span>
-                    <span className="block text-xs mt-3 font-light">Welcome to ATM Manager</span>
+                    <span className="block text-xs mt-3 font-light">Narcotics Drug Production License Manager</span>
 
                     <div className="mt-5">
                         <div>
@@ -107,10 +107,12 @@ export default function Login(){
                     </div>
                 </div>
                 <div className="mt-5">
-                    <span className="block text-center text-sm">
-                    Don't have an account?
-                    <span className="text-green-700 font-medium"> Sign up</span>
-                </span>
+                   <Link to={'/signup'}>
+                        <span className="block text-center text-sm">
+                        Don't have an account?
+                        <span className="text-green-700 font-medium"> Sign up</span>
+                    </span>
+                   </Link>
                 </div>
             </div>
         </div>

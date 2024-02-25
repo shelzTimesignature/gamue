@@ -1,8 +1,7 @@
 import {Link, Navigate, Outlet} from "react-router-dom";
 import useDataQuery from "@/hooks/useDataQuery.ts";
 import LogoutModalComponent from "@/components/LogoutModalComponent.tsx";
-import {VaultTransactionComponent} from "@/components/VaultTransactionComponent.tsx";
-
+import ReactLoading from 'react-loading';
 export default function AppLayout(){
 
     const {data,isLoading,isError}=useDataQuery('user','user')
@@ -15,8 +14,9 @@ export default function AppLayout(){
             <>
                 {
                     isLoading && (
-                        <div className="fixed inset-0 bg-zinc-900 flex items-center justify-center text-zinc-200">
-                            <span className="block text-xs uppercase tracking-widest">...Loading</span>
+                        <div className="fixed inset-0 bg-zinc-900 flex flex-col items-center justify-center text-zinc-200">
+                            <ReactLoading type={'spin'} color={'green'} height={80} width={80} />
+                            <span className="block text-xs uppercase tracking-widest mt-10">...Loading</span>
                         </div>
                     )
                 }
@@ -48,39 +48,52 @@ export default function AppLayout(){
                                 </Link>
                             </div>
                             <div className="mt-10 flex-1 flex flex-col space-y-10">
-                                <div className="flex flex-col space-y-5">
-                                    <span className="block text-xs text-zinc-600">Menu</span>
-                                    <Link to={'/'}>
-                                        <span className="block text-xs">Dashboard</span>
-                                    </Link>
-                                    <Link to={'/company'}>
-                                        <span className="block text-xs">Company</span>
-                                    </Link>
 
-                                    <Link to={'/drug'}>
-                                        <span className="block text-xs">Drug</span>
-                                    </Link>
-                                    <Link to={'/license'}>
-                                        <span className="block text-xs">Licenses</span>
-                                    </Link>
-                                    <Link to={'/Distribution'}>
-                                        <span className="block text-xs">Distributions</span>
-                                    </Link>
-                                </div>
-                                <div className="flex flex-col space-y-5">
-                                    <span className="block text-xs text-zinc-600">Users</span>
-                                    <Link to={'/contacts'}>
-                                        <span className="block text-xs">Contacts</span>
-                                    </Link>
-                                    <Link to={'/employees'}>
-                                        <span className="block text-xs">Employees</span>
-                                    </Link>
-                                </div>
+                                {
+                                    data.type==='system' && (
+                                        <div className="flex flex-col space-y-5">
+                                            <span className="block text-xs text-zinc-600">Menu</span>
+                                            <Link to={'/'}>
+                                                <span className="block text-xs">Dashboard</span>
+                                            </Link>
 
-                                <div className="flex flex-col space-y-5">
-                                    <span className="block text-xs text-zinc-600">Reports</span>
-                                    <VaultTransactionComponent/>
-                                </div>
+
+                                            <Link to={'/company'}>
+                                                <span className="block text-xs">Company</span>
+                                            </Link>
+
+
+                                            <Link to={'/drug'}>
+                                                <span className="block text-xs">Drug</span>
+                                            </Link>
+                                            <Link to={'/license'}>
+                                                <span className="block text-xs">Licenses</span>
+                                            </Link>
+                                            <Link to={'/Distribution'}>
+                                                <span className="block text-xs">Distributions</span>
+                                            </Link>
+                                        </div>
+                                    )
+                                }
+
+
+                                <>
+                                    {
+                                        data.type==='company' && (
+                                            <div className="flex flex-col space-y-5">
+                                                <span className="block text-xs text-zinc-600">Menu</span>
+                                                <Link to={'/'}>
+                                                    <span className="block text-xs">Dashboard</span>
+                                                </Link>
+
+                                                <Link to={'/license'}>
+                                                    <span className="block text-xs">Licenses</span>
+                                                </Link>
+                                            </div>
+                                        )
+                                    }
+                                </>
+
 
                                 <div className="flex flex-col space-y-5">
                                 <span className="block text-xs text-zinc-600">Authentication</span>

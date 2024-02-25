@@ -78,7 +78,7 @@
 
 
 .input{
-  @apply w-full bg-transparent rounded-sm appearance-none resize-none px-3 py-4 focus:outline-none border border-zinc-800 text-sm focus:ring-2 focus:ring-green-500
+  @apply w-full placeholder-zinc-600 bg-transparent rounded-sm appearance-none resize-none px-3 py-4 focus:outline-none border border-zinc-800 text-sm focus:ring-2 focus:ring-green-500
 }
 
 
